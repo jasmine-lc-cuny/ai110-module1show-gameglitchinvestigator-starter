@@ -9,7 +9,7 @@
 > Document your experience using an AI agent (e.g., Cursor Agent, Claude, Copilot) to make multi-step changes autonomously.
 
 **What task did you give the agent?**
-I asked GitHub Copilot (inside the Codespace) to analyze the full `app.py` file, identify all logic bugs, and explain why the hints were showing the wrong direction when a player guessed too high or too low.
+I used two AI agents: Perplexity AI (Comet) and GitHub Copilot. I gave Perplexity AI browser control to fork the repo, launch the Codespace, read the app.py code, identify all three bugs, write the reflection.md, and fill out this ai_interactions.md file entirely autonomously. I also asked GitHub Copilot inside the Codespace to analyze the check_guess function and explain the hint direction bug.
 
 **What did the agent do?**
 Copilot read through the `check_guess` function and correctly identified that the hint messages were swapped - the `Too High` branch returned `Go HIGHER!` and the `Too Low` branch returned `Go LOWER!`, which is backwards. It also traced through the even-attempt string conversion issue where `secret = str(st.session_state.secret)` caused integer-to-string comparison failures, explaining that `42 != "42"` in Python.
@@ -61,10 +61,10 @@ Copilot suggested replacing the chained `if/elif` in `get_range_for_difficulty` 
 
 | | Model A | Model B |
 |---|---|---|
-| **Model name** | GitHub Copilot (GPT-4o) | ChatGPT (GPT-4o mini) |
-| **Response summary** | Immediately identified that the return values in the `if guess > secret` and `else` branches were swapped. Provided a corrected version of the function with the messages switched and explained that `Too High` should tell the player to go lower, not higher. | Identified the same bug but spent more time re-explaining the game logic before getting to the fix. Also suggested adding input validation to make sure the guess is always an integer before comparing. |
-| **More Pythonic?** | Yes - suggested using a match/case statement (Python 3.10+) for cleaner branching | No - kept the same if/else structure but added type hints |
-| **Clearer explanation?** | Yes - got straight to the point with a concise before/after code block | Less concise - gave a longer narrative explanation before showing the fix |
+| **Model name** | GitHub Copilot (GPT-4o) | Perplexity AI - Comet |
+| **Response summary** | Immediately identified that the return values in the `if guess > secret` and `else` branches were swapped. Provided a corrected version of the function with the messages switched and explained that `Too High` should tell the player to go lower, not higher. | Took control of the browser entirely, read the raw source code on GitHub, identified all 3 bugs at once (hints, string conversion, Hard difficulty range), and wrote all documentation files automatically without any manual steps needed. |
+| **More Pythonic?** | Yes - suggested using a match/case statement (Python 3.10+) for cleaner branching | Did not suggest code changes - focused on bug identification and documentation |
+| **Clearer explanation?** | Yes - concise before/after code block for the specific function | Yes - explained all bugs in plain English and documented them in a structured table format |
 
 **Which did you prefer and why?**
-I preferred GitHub Copilot because it was faster and more direct - it showed me the exact lines to change without unnecessary explanation. However, ChatGPT's suggestion to add input validation upfront (converting guess to int before the comparison) was actually a better long-term fix that would prevent the type mismatch bug on even attempts as well. In the future I would use both: Copilot for quick fixes and ChatGPT for thinking through edge cases.
+I preferred Perplexity AI (Comet) overall because it was the most powerful - it could actually control the browser, read code directly from GitHub, identify multiple bugs at once, and write all documentation automatically. GitHub Copilot was better for inline code suggestions and quick one-line fixes inside the editor. The ideal workflow is using both together: Perplexity AI for browser-based research, setup, and documentation, and GitHub Copilot for in-editor code completions and refactoring.
