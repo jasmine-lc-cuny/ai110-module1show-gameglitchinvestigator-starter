@@ -64,7 +64,7 @@ Copilot suggested replacing the chained `if/elif` in `get_range_for_difficulty` 
 | | Model A | Model B |
 |---|---|---|
 | **Model name** | GitHub Copilot (GPT-4o) | Perplexity AI - Comet |
-| **Response summary** | Immediately identified that the return values in the `if guess > secret` and `else` branches were swapped. Provided a corrected version of the function with the messages switched and explained that `Too High` should tell the player to go lower, not higher. | Took control of the browser entirely, read the raw source code on GitHub, identified all 3 bugs at once (hints, string conversion, Hard difficulty range), and wrote all documentation files automatically without any manual steps needed. |
+| **Response summary** | Immediately identified that the return values in the `if guess > secret` and `else` branches were swapped. Provided a corrected version of the function with the messages switched and explained that `Too High` should tell the player to go lower, not higher. | Helped me move through the GitHub/Codespace workflow, review the source code, identify all 3 bugs at once (hints, string conversion, Hard difficulty range), and organize documentation notes. |
 | **More Pythonic?** | Yes - suggested using a match/case statement (Python 3.10+) for cleaner branching | Did not suggest code changes - focused on bug identification and documentation |
 | **Clearer explanation?** | Yes - concise before/after code block for the specific function | Yes - explained all bugs in plain English and documented them in a structured table format |
 
