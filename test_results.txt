@@ -1,83 +1,9 @@
-============================= test session starts ==============================
-platform linux -- Python 3.12.1, pytest-9.1.0, pluggy-1.6.0 -- /home/codespace/.python/current/bin/python
-cachedir: .pytest_cache
-rootdir: /workspaces/ai110-module1show-gameglitchinvestigator-starter
+============================= test session starts =============================
+platform win32 -- Python 3.14.5, pytest-9.1.0, pluggy-1.6.0
+rootdir: D:\codex\ai110-module1show-gameglitchinvestigator-starter
 plugins: anyio-4.14.0
-collecting ... collected 3 items
+collected 7 items
 
-tests/test_game_logic.py::test_winning_guess FAILED                      [ 33%]
-tests/test_game_logic.py::test_guess_too_high FAILED                     [ 66%]
-tests/test_game_logic.py::test_guess_too_low FAILED                      [100%]
+tests\test_game_logic.py .......                                         [100%]
 
-=================================== FAILURES ===================================
-______________________________ test_winning_guess ______________________________
-
-    def test_winning_guess():
-        # If the secret is 50 and guess is 50, it should be a win
->       result = check_guess(50, 50)
-                 ^^^^^^^^^^^^^^^^^^^
-
-tests/test_game_logic.py:5: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-guess = 50, secret = 50
-
-    def check_guess(guess, secret):
-        """
-        Compare guess to secret and return (outcome, message).
-    
-        outcome examples: "Win", "Too High", "Too Low"
-        """
->       raise NotImplementedError("Refactor this function from app.py into logic_utils.py")
-E       NotImplementedError: Refactor this function from app.py into logic_utils.py
-
-logic_utils.py:21: NotImplementedError
-_____________________________ test_guess_too_high ______________________________
-
-    def test_guess_too_high():
-        # If secret is 50 and guess is 60, hint should be "Too High"
->       result = check_guess(60, 50)
-                 ^^^^^^^^^^^^^^^^^^^
-
-tests/test_game_logic.py:10: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-guess = 60, secret = 50
-
-    def check_guess(guess, secret):
-        """
-        Compare guess to secret and return (outcome, message).
-    
-        outcome examples: "Win", "Too High", "Too Low"
-        """
->       raise NotImplementedError("Refactor this function from app.py into logic_utils.py")
-E       NotImplementedError: Refactor this function from app.py into logic_utils.py
-
-logic_utils.py:21: NotImplementedError
-______________________________ test_guess_too_low ______________________________
-
-    def test_guess_too_low():
-        # If secret is 50 and guess is 40, hint should be "Too Low"
->       result = check_guess(40, 50)
-                 ^^^^^^^^^^^^^^^^^^^
-
-tests/test_game_logic.py:15: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-guess = 40, secret = 50
-
-    def check_guess(guess, secret):
-        """
-        Compare guess to secret and return (outcome, message).
-    
-        outcome examples: "Win", "Too High", "Too Low"
-        """
->       raise NotImplementedError("Refactor this function from app.py into logic_utils.py")
-E       NotImplementedError: Refactor this function from app.py into logic_utils.py
-
-logic_utils.py:21: NotImplementedError
-=========================== short test summary info ============================
-FAILED tests/test_game_logic.py::test_winning_guess - NotImplementedError: Re...
-FAILED tests/test_game_logic.py::test_guess_too_high - NotImplementedError: R...
-FAILED tests/test_game_logic.py::test_guess_too_low - NotImplementedError: Re...
-============================== 3 failed in 0.08s ===============================
+============================== 7 passed in 0.03s ==============================

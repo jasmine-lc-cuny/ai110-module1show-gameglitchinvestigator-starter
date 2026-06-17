@@ -4,7 +4,7 @@ Answer each question in 3 to 5 sentences.
 
 ## 1. What was broken when you started?
 
-When I first ran the game, it looked like a normal number guessing game but was nearly impossible to win. The hints were completely backwards: when my guess was too high, the game said Go HIGHER instead of Go LOWER. The secret number also seemed to change between guesses because on even-numbered attempts the code converts the secret to a string, causing type mismatches. Additionally, Hard mode returns a range of 1-50, which is actually easier than Normal mode range of 1-100.
+When I first ran the game, it looked like a normal number guessing game but was nearly impossible to win. The hints were completely backwards: when my guess was too high, the game said Go HIGHER instead of Go LOWER. The secret number also seemed to change between guesses because on even-numbered attempts the code converted the secret to a string, causing type mismatches. Additionally, Hard mode returned a range of 1-50, which was actually easier than Normal mode range of 1-100.
 
 ### Bug Reproduction Log
 
@@ -16,11 +16,11 @@ When I first ran the game, it looked like a normal number guessing game but was 
 
 ## 2. How did you use AI as a teammate?
 
-I used two AI tools throughout this project: Perplexity AI (Comet) and GitHub Copilot. I used Perplexity AI first to take control of my browser, set up the entire GitHub Codespace, read the app.py code, and identify all three bugs without me having to do anything manually. I then used GitHub Copilot inside the Codespace to get additional explanations of the check_guess function and the string conversion bug on even attempts. One thing I had to verify manually was the Hard difficulty bug, since neither AI flagged it automatically - I had to compare the three ranges myself.
+I used Perplexity AI, GitHub Copilot, and Codex as teammates at different stages. Perplexity helped me understand the assignment flow and identify the first set of bugs, while Copilot helped explain the `check_guess` logic inside the Codespace. Codex helped finish the repair by comparing the existing documentation to the real code, noticing that `logic_utils.py` still raised `NotImplementedError`, moving the logic into that file, and expanding the pytest tests. One misleading AI result I had to correct was documentation that claimed tests had been generated even though the saved test output still showed failures.
 
 ## 3. Debugging and testing your fixes
 
-To verify each bug, I traced through the code manually with specific inputs and compared expected versus actual behavior. For the hints bug, I simulated: secret=42, guess=60, so guess > secret is True, which hits the Too High branch returning Go HIGHER - but that tells the player to guess higher when they should go lower. I also reviewed the existing tests in the tests/ folder to see what was already covered. The string conversion bug was confirmed by reading the lines where secret is set to str(session_state.secret) on even attempts before passing to check_guess.
+To verify each bug, I traced through the code manually with specific inputs and compared expected versus actual behavior. For the hints bug, I simulated: secret=42, guess=60, so guess > secret is True, and the fixed code now returns `Too High` with `Go LOWER!`. I added tests for the win case, high/low hints, string secret conversion, Hard difficulty range, decimal input, and score behavior. I ran `python -m pytest` and confirmed that all 7 tests passed.
 
 ## 4. What did you learn about Streamlit and state?
 

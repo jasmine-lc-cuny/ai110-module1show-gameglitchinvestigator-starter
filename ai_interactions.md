@@ -12,10 +12,10 @@
 I used two AI agents: Perplexity AI (Comet) and GitHub Copilot. I gave Perplexity AI browser control to fork the repo, launch the Codespace, read the app.py code, identify all three bugs, write the reflection.md, and fill out this ai_interactions.md file entirely autonomously. I also asked GitHub Copilot inside the Codespace to analyze the check_guess function and explain the hint direction bug.
 
 **What did the agent do?**
-Copilot read through the `check_guess` function and correctly identified that the hint messages were swapped - the `Too High` branch returned `Go HIGHER!` and the `Too Low` branch returned `Go LOWER!`, which is backwards. It also traced through the even-attempt string conversion issue where `secret = str(st.session_state.secret)` caused integer-to-string comparison failures, explaining that `42 != "42"` in Python.
+Copilot read through the `check_guess` function and correctly identified that the hint messages were swapped - the `Too High` branch returned `Go HIGHER!` and the `Too Low` branch returned `Go LOWER!`, which is backwards. It also traced through the even-attempt string conversion issue where `secret = str(st.session_state.secret)` caused integer-to-string comparison failures, explaining that `42 != "42"` in Python. Codex later checked the repository state, found that `logic_utils.py` still contained placeholder `NotImplementedError` functions, completed the refactor, and expanded the pytest suite.
 
 **What did you have to verify or fix manually?**
-I had to manually compare the three difficulty range values (`Easy: 1-20`, `Normal: 1-100`, `Hard: 1-50`) to catch that Hard mode was actually easier than Normal mode. Copilot did not flag this automatically because it only saw each branch in isolation, not the relative comparison between them.
+I had to manually compare the three difficulty range values (`Easy: 1-20`, `Normal: 1-100`, `Hard: 1-50`) to catch that Hard mode was actually easier than Normal mode. I also had to verify AI-generated documentation against the actual test output, because one saved version of `test_results.txt` showed that all tests were still failing before the final repair.
 
 ---
 
@@ -25,9 +25,11 @@ I had to manually compare the three difficulty range values (`Easy: 1-20`, `Norm
 
 | Edge Case | Prompt Used | AI-Suggested Test | Did It Pass? | Your Reasoning |
 |-----------|-------------|-------------------|--------------|----------------|
-| Guess exactly equals secret on an even-numbered attempt (string conversion bug) | "Write a pytest test for check_guess where the guess equals the secret but secret is passed as a string instead of an integer" | `assert check_guess(42, "42") == ("Win", "Correct!")` | No - returned `Too Low` instead of Win | This confirmed the type mismatch bug. When secret is a string, `42 == "42"` is False in Python, so the win condition is never triggered on even attempts |
-| Guess is higher than secret but hint says Go Higher (backwards hint bug) | "Write a test to check that when guess is greater than secret, the hint tells the player to go lower" | `assert check_guess(60, 42)[1] == "Go LOWER!"` | No - returned `Go HIGHER!` | This proved the hint logic is reversed. The `if guess > secret` branch incorrectly returns the Go HIGHER message |
-| Hard difficulty range is harder than Normal | "Write a test that verifies get_range_for_difficulty returns a wider range for Hard than for Normal" | `assert get_range_for_difficulty("Hard")[1] > get_range_for_difficulty("Normal")[1]` | No - Hard returns 50, Normal returns 100 | Hard mode (1-50) has a smaller range than Normal (1-100), making it easier, not harder |
+| Guess exactly equals secret when secret is passed as a string | "Write a pytest test for check_guess where the guess equals the secret but secret is passed as a string instead of an integer" | `assert check_guess(42, "42")[0] == "Win"` | Yes | This verifies the fix converts inputs consistently before comparing them |
+| Guess is higher than secret | "Write a test to check that when guess is greater than secret, the hint tells the player to go lower" | `assert check_guess(60, 42)[1] == "Go LOWER!"` | Yes | This proves the hint now tells the player the correct next direction |
+| Hard difficulty range is harder than Normal | "Write a test that verifies get_range_for_difficulty returns a wider range for Hard than for Normal" | `assert get_range_for_difficulty("Hard")[1] > get_range_for_difficulty("Normal")[1]` | Yes | Hard mode now uses a wider range than Normal, making it meaningfully harder |
+| Decimal input | "Add an edge-case test for decimal input in parse_guess" | `assert parse_guess("42.5")[0] is False` | Yes | The game now asks for whole-number guesses instead of silently truncating decimals |
+| Wrong guesses and score | "Add a test that proves wrong guesses do not increase the score" | `assert update_score(0, "Too High", 1) == 0` | Yes | This prevents the previous score behavior where some wrong guesses added points |
 
 ---
 

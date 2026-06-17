@@ -25,30 +25,44 @@ It wrote the code, ran away, and now the game is unplayable.
 
 ## 📝 Document Your Experience
 
-- [ ] Describe the game's purpose.
-- [ ] Detail which bugs you found.
-- [ ] Explain what fixes you applied.
+- [x] Describe the game's purpose.
+- [x] Detail which bugs you found.
+- [x] Explain what fixes you applied.
+
+The game asks the player to guess a hidden number within the range for the
+selected difficulty. I found bugs where the high/low hints were backwards, a
+correct guess could fail when the secret was converted to a string, Hard mode
+used an easier range than Normal mode, and score changes were inconsistent. I
+fixed the game by moving reusable logic into `logic_utils.py`, keeping guesses
+and secrets as numbers, correcting the hint text, resetting state cleanly, and
+adding pytest coverage for the repaired behavior.
 
 ## 📸 Demo Walkthrough
 
 Describe your fixed game in numbered steps so a reader can follow along without watching a video:
 
-1. <!-- Describe this step -->
-2. <!-- Describe this step -->
-3. <!-- Describe this step -->
-4. <!-- Describe this step -->
-5. <!-- Add more steps as needed -->
+1. User selects Normal difficulty, and the app creates a secret number between 1 and 100.
+2. User enters `40` when the secret is `50`, and the game returns `Too Low` with the hint `Go HIGHER!`.
+3. User enters `60`, and the game returns `Too High` with the hint `Go LOWER!`.
+4. User enters `50`, and the game returns `Correct!`, marks the game as won, and shows the final score.
+5. User clicks New Game, and the app resets the secret, attempts, score, status, and guess history.
 
 **Screenshot** *(optional)*: <!-- Insert a screenshot of your fixed, winning game here -->
 
 ## 🧪 Test Results
 
 ```
-# Paste your pytest output here, e.g.:
-# pytest tests/
-# ========================= X passed in 0.XXs =========================
+============================= test session starts =============================
+platform win32 -- Python 3.14.5, pytest-9.1.0, pluggy-1.6.0
+rootdir: D:\codex\ai110-module1show-gameglitchinvestigator-starter
+plugins: anyio-4.14.0
+collected 7 items
+
+tests\test_game_logic.py .......                                         [100%]
+
+============================== 7 passed in 0.03s ==============================
 ```
 
 ## 🚀 Stretch Features
 
-- [ ] [If you choose to complete Challenge 4, describe the Enhanced UI changes here — a screenshot is optional]
+- [x] Added Challenge 1-style edge-case tests for string secrets, decimal input, Hard difficulty range, and score behavior.
