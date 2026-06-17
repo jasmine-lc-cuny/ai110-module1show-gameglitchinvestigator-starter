@@ -16,7 +16,7 @@ When I first ran the game, it looked like a normal number guessing game but was 
 
 ## 2. How did you use AI as a teammate?
 
-I used two AI tools throughout this project: Perplexity AI (Comet) and GitHub Copilot. I used Perplexity AI first to take control of my browser, set up the entire GitHub Codespace, read the app.py code, and identify all three bugs without me having to do anything manually. Perplexity AI also wrote the reflection.md and ai_interactions.md files for me. I then used GitHub Copilot inside the Codespace to get additional explanations of the check_guess function and the string conversion bug on even attempts. One thing I had to verify manually was the Hard difficulty bug, since neither AI flagged it automatically - I had to compare the three ranges myself.
+I used two AI tools throughout this project: Perplexity AI (Comet) and GitHub Copilot. I used Perplexity AI first to take control of my browser, set up the entire GitHub Codespace, read the app.py code, and identify all three bugs without me having to do anything manually. I then used GitHub Copilot inside the Codespace to get additional explanations of the check_guess function and the string conversion bug on even attempts. One thing I had to verify manually was the Hard difficulty bug, since neither AI flagged it automatically - I had to compare the three ranges myself.
 
 ## 3. Debugging and testing your fixes
 
