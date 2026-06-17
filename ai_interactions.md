@@ -9,7 +9,7 @@
 > Document your experience using an AI agent (e.g., Cursor Agent, Claude, Copilot) to make multi-step changes autonomously.
 
 **What task did you give the agent?**
-I used two AI agents: Perplexity AI (Comet) and GitHub Copilot. I gave Perplexity AI browser control to fork the repo, launch the Codespace, read the app.py code, identify all three bugs, write the reflection.md, and fill out this ai_interactions.md file entirely autonomously. I also asked GitHub Copilot inside the Codespace to analyze the check_guess function and explain the hint direction bug.
+I used three AI tools: Perplexity AI (Comet), GitHub Copilot, and Codex. I gave Perplexity AI browser control to fork the repo, launch the Codespace, read the app.py code, and identify the first three bugs. I asked GitHub Copilot inside the Codespace to analyze the `check_guess` function and explain the hint direction bug. I then asked Codex to inspect the GitHub repo, compare the documentation against the actual code, finish the logic refactor, add stronger pytest coverage, verify the app, and push the completed changes.
 
 **What did the agent do?**
 Copilot read through the `check_guess` function and correctly identified that the hint messages were swapped - the `Too High` branch returned `Go HIGHER!` and the `Too Low` branch returned `Go LOWER!`, which is backwards. It also traced through the even-attempt string conversion issue where `secret = str(st.session_state.secret)` caused integer-to-string comparison failures, explaining that `42 != "42"` in Python. Codex later checked the repository state, found that `logic_utils.py` still contained placeholder `NotImplementedError` functions, completed the refactor, and expanded the pytest suite.
