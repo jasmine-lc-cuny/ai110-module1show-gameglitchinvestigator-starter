@@ -1,0 +1,30 @@
+graph TD
+    User([User / Browser]) -->|enters guess| App[app.py - Streamlit UI]
+    App -->|reads difficulty| GetRange[get_range_for_difficulty]
+    App -->|validates input| ParseGuess[parse_guess]
+    ParseGuess -->|valid int| CheckGuess[check_guess]
+    CheckGuess -->|outcome + message| App
+    App -->|updates| SessionState[(st.session_state)]
+    SessionState -->|secret, attempts, score, status, history| App
+    App -->|outcome + attempt_number| UpdateScore[update_score]
+    UpdateScore -->|new score| SessionState
+    CheckGuess -->|Win| BalloonEffect[Balloons + Win Message]
+    CheckGuess -->|Too High or Too Low| HintMessage[Hint Message Displayed]
+    App -->|imports| LogicUtils[logic_utils.py]
+
+    subgraph Core Logic
+        GetRange
+        ParseGuess
+        CheckGuess
+        UpdateScore
+    end
+
+    subgraph Streamlit State
+        SessionState
+    end
+
+    subgraph UI Layer
+        App
+        BalloonEffect
+        HintMessage
+    end
