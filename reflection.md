@@ -16,7 +16,7 @@ When I first ran the game, it looked like a normal number guessing game but was 
 
 ## 2. How did you use AI as a teammate?
 
-I used Perplexity AI, GitHub Copilot, and Codex as teammates at different stages. Perplexity helped me understand the assignment flow and identify the first set of bugs, while Copilot helped explain the `check_guess` logic inside the Codespace. Codex helped finish the repair by comparing the existing documentation to the real code, noticing that `logic_utils.py` still raised `NotImplementedError`, moving the logic into that file, and expanding the pytest tests. One misleading AI result I had to correct was documentation that claimed tests had been generated even though the saved test output still showed failures.
+I used Perplexity AI, GitHub Copilot, and Codex as teammates at different stages. I also wanted to try Claude AI because CodePath offers access to it, but I did not understand the difference between Opus and Sonnet at first. While working on my CodePath CYB101 project, I used Opus too much and ran through my credits because I later learned it is the highest-usage option. For this project, Perplexity helped me understand the assignment flow and identify the first set of bugs, Copilot helped explain the `check_guess` logic inside the Codespace, and Codex helped finish the repair by comparing the documentation to the real code, moving the logic into `logic_utils.py`, and expanding the pytest tests. One misleading AI result I had to correct was documentation that claimed tests had been generated even though the saved test output still showed failures.
 
 ## 3. Debugging and testing your fixes
 
